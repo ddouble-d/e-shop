@@ -51,6 +51,11 @@
     <script src="{{ asset('admin/assets/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('admin/assets/plugins/slimscrollbar/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('admin/assets/js/sleek.bundle.js') }}"></script>
+    <script>
+        $(".delete").on("submit", function() {
+            return confirm("Do you want to remove this?");
+        });
+    </script>
 
 </body>
 
