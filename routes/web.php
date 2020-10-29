@@ -23,7 +23,11 @@ Route::group(
     ['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth']],
     function () {
         Route::get('dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+
+        /* Categories */
         Route::resource('categories', '\App\Http\Controllers\Admin\CategoryController');
+        /* Products */
+        Route::resource('products', '\App\Http\Controllers\Admin\ProductController');
     }
 );
 

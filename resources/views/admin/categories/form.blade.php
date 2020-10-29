@@ -23,7 +23,7 @@ $formTitle = !empty($category) ? 'Update' : 'New';
                         {{ Form::label('name', 'Name') }}
                         {{ Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Category Name']) }}
                         @error('name')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -32,7 +32,7 @@ $formTitle = !empty($category) ? 'Update' : 'New';
                         => !empty(old('parent_id')) ? old('parent_id') : (!empty($category['parent_id']) ?
                         $category['parent_id'] : ''), 'placeholder' => '-- Choose Category --']) !!}
                         @error('parent_id')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="form-footer pt-5 border-top">

@@ -6,8 +6,8 @@
         <div class="col-lg-12">
             <div class="card card-default">
                 <div class="card-header card-header-border-bottom d-flex justify-content-between">
-                    <h2>Categories</h2>
-                    <a href="{{ url('admin/categories/create') }}" class="btn btn-primary">+ Add New</a>
+                    <h2>Products</h2>
+                    <a href="{{ url('admin/products/create') }}" class="btn btn-primary">+ Add New</a>
                 </div>
                 <div class="card-body">
                     @if (session('success'))
@@ -27,46 +27,44 @@
                     @endif
                     <table class="table table-bordered table-stripped">
                         <thead>
-                            <tr>
-                                <th width="5%">#</th>
-                                <th>Name</th>
-                                <th>Slug</th>
-                                <th>Parent</th>
-                                <th width="15%">Action</th>
-                            </tr>
+                            <th width="5%">#</th>
+                            <th>SKU</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th width="15%">Action</th>
                         </thead>
                         <tbody>
                             @php
                             $no=1;
                             @endphp
-                            @forelse ($categories as $category)
+                            @forelse ($products as $product)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $category->name }}</td>
-                                <td>{{ $category->slug }}</td>
-                                <td>{{ $category->parent_id ? $category->parent->name : '' }}</td>
+                                <td>{{ $product->sku }}</td>
+                                <td>{{ $product->name }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>{{ $product->status }}</td>
                                 <td>
-                                    <a href="{{ url('admin/categories/'.$category->id.'/edit') }}"
+                                    <a href="{{ url('admin/products/'. $product->id .'/edit') }}"
                                         class="btn btn-warning btn-sm">Edit</a>
-                                    {{ Form::open(['url' => 'admin/categories/'.$category->id, 'class' => 'delete',
-                                    'style' => 'display:inline-block'])
-                                    }}
-                                    {{ Form::hidden('_method', 'DELETE') }}
-                                    {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) }}
-                                    {{ Form::close() }}
+
+                                    {!! Form::open(['url' => 'admin/products/'. $product->id, 'class' => 'delete',
+                                    'style' => 'display:inline-block']) !!}
+                                    {!! Form::hidden('_method', 'DELETE') !!}
+                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                                    {!! Form::close() !!}
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5">No records found</td>
+                                <td colspan="6">No records found</td>
                             </tr>
                             @endforelse
                         </tbody>
                     </table>
+                    {{ $products->links() }}
                 </div>
-            </div>
-            <div class="d-flex justify-content-center">
-                {{ $categories->links() }}
             </div>
         </div>
     </div>

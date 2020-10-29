@@ -48,6 +48,8 @@ class CategoryController extends Controller
 
         if (Category::create($params)) {
             Session::flash('success', 'Category has been saved');
+        } else {
+            Session::flash('error', 'Category could not been saved');
         }
         return redirect('admin/categories');
     }
@@ -93,6 +95,8 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         if ($category->update($params)) {
             Session::flash('success', 'Category has been updated');
+        } else {
+            Session::flash('error', 'Category could not been updated');
         }
         return redirect('admin/categories');
     }
@@ -108,6 +112,8 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         if ($category->delete()) {
             Session::flash('success', 'Category has been deleted');
+        } else {
+            Session::flash('error', 'Category could not been deleted');
         }
 
         return redirect('admin/categories');
