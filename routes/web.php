@@ -33,6 +33,13 @@ Route::group(
         Route::get('products/{product}/add-image', [ProductController::class, 'addImage']);
         Route::post('products/images/{image}', [ProductController::class, 'uploadImage']);
         Route::delete('products/images/{image}', [ProductController::class, 'deleteImage']);
+        /* Product Attributes */
+        Route::resource('attributes', '\App\Http\Controllers\Admin\AttributeController');
+        Route::get('attributes/{attribute}/options', '\App\Http\Controllers\Admin\AttributeController@options');
+        Route::post('attributes/options/{attribute}', '\App\Http\Controllers\Admin\AttributeController@storeOption');
+        Route::delete('attributes/options/{option}', '\App\Http\Controllers\Admin\AttributeController@removeOption');
+        Route::get('attributes/options/{option}/edit', '\App\Http\Controllers\Admin\AttributeController@editOption');
+        Route::put('attributes/options/{option}', '\App\Http\Controllers\Admin\AttributeController@updateOption');
     }
 );
 
