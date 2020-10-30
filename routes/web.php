@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,10 @@ Route::group(
         Route::resource('categories', '\App\Http\Controllers\Admin\CategoryController');
         /* Products */
         Route::resource('products', '\App\Http\Controllers\Admin\ProductController');
+        Route::get('products/{product}/images', [ProductController::class, 'images']);
+        Route::get('products/{product}/add-image', [ProductController::class, 'addImage']);
+        Route::post('products/images/{image}', [ProductController::class, 'uploadImage']);
+        Route::delete('products/images/{image}', [ProductController::class, 'deleteImage']);
     }
 );
 

@@ -7,7 +7,8 @@ $formTitle = !empty($category) ? 'Update' : 'New'
 
 <div class="content">
     <div class="row">
-        <div class="col-lg-12">
+        @include('admin.products.product_menus')
+        <div class="col-lg-8">
             <div class="card card-default">
                 <div class="card-header card-header-border-bottom">
                     <h2>{{ $formTitle }} Product</h2>
@@ -51,7 +52,7 @@ $formTitle = !empty($category) ? 'Update' : 'New'
                             {!! Form::label('category_ids', 'Category') !!}
                             {!! General::selectMultiLevel('category_ids[]', $categories, ['class' => 'form-control',
                             'multiple' => true, 'selected' => !empty(old('category_ids')) ? old('category_ids') :
-                            $categoryIDs, 'placeholder' => '-- Choose Category --']) !!}
+                            $categoryIDs]) !!}
                             @error('category_ids')
                             <p class="text-danger">{{ $message }}</p>
                             @enderror

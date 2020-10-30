@@ -42,4 +42,9 @@ class Product extends Model
             2 => 'Inactive'
         ];
     }
+
+    public function productImages()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
 }
