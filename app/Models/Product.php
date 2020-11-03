@@ -10,8 +10,10 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
+        'parent_id',
         'user_id',
         'sku',
+        'type',
         'name',
         'slug',
         'price',
@@ -29,9 +31,34 @@ class Product extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function productInvertory()
+    {
+        return $this->hasOne(ProductInventory::class);
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'product_categories');
+    }
+
+    public function variants()
+    {
+        return $this->hasMany(Product::class, 'parent_id');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(Product::class, 'parent_id');
+    }
+
+    public function productAttributeValues()
+    {
+        return $this->hasMany(ProductAttributeValue::class);
+    }
+
+    public function productImages()
+    {
+        return $this->hasMany(ProductImage::class);
     }
 
     public static function statuses()
@@ -43,8 +70,17 @@ class Product extends Model
         ];
     }
 
-    public function productImages()
+    function status_label()
     {
-        return $this->hasMany(ProductImage::class);
+        $statuses = $this->statuses();
+        return isset($this->status) ? $statuses[$this->status] : null;
+    }
+
+    public static function types()
+    {
+        return [
+            'simple' => 'Simple',
+            'configurable' => 'Configurable'
+        ];
     }
 }

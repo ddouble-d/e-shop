@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('admin/dashboard');
 });
 
 Auth::routes();
@@ -43,4 +43,6 @@ Route::group(
     }
 );
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', function () {
+    return redirect('admin/dashboard');
+})->name('home');
