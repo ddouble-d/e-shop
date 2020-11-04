@@ -8,9 +8,11 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use App\Authorizable;
 
 class CategoryController extends Controller
 {
+    use Authorizable;
     /**
      * Display a listing of the resource.
      *

@@ -9,9 +9,12 @@ use App\Models\Attribute;
 use App\Models\AttributeOption;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use App\Authorizable;
 
 class AttributeController extends Controller
 {
+    use Authorizable;
+
     public function __construct()
     {
         $this->data['types'] = Attribute::types();

@@ -17,9 +17,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use App\Authorizable;
 
 class ProductController extends Controller
 {
+    use Authorizable;
+
     public function __construct()
     {
         $this->data['statuses'] = Product::statuses();
@@ -108,8 +111,8 @@ class ProductController extends Controller
             return redirect('admin/products/create');
         }
         $product = Product::findOrFail($id);
+        $product->qty = isset($product->productInventory) ? $product->productInventory->qty : null;
         $categories = Category::orderBy('name', 'ASC')->get();
-
         $this->data['categories'] = $categories->toArray();
         $this->data['product'] = $product;
         $this->data['productID'] = $product->id;

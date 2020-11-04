@@ -7,7 +7,9 @@
             <div class="card card-default">
                 <div class="card-header card-header-border-bottom d-flex justify-content-between">
                     <h2>Products</h2>
+                    @can('add_products')
                     <a href="{{ url('admin/products/create') }}" class="btn btn-primary">+ Add New</a>
+                    @endcan
                 </div>
                 <div class="card-body">
                     @include('flash.messages')
